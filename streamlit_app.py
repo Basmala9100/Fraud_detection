@@ -90,7 +90,7 @@ def type_selection():
             elif option == "Predict With Transaction Credit Card":
                 st.session_state["page"] = "credit_card"
             
-            st.experimental_rerun()  # Refresh the app to switch the page based on the selected option
+            #st.experimental_rerun()  # Refresh the app to switch the page based on the selected option
     if st.button('Back To Home'):
             st.session_state["page"] = 'home'
     
