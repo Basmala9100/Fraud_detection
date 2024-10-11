@@ -2,7 +2,9 @@ import streamlit as st
 import joblib
 import numpy as np    
 from sklearn.preprocessing import LabelEncoder
+import streamlit as st
 import base64
+from streamlit.components.v1 import html
 
 # Load text models
 tfidf_model = joblib.load(r'E:\DEPI\FINAL PROJECT\models\text_models\tfidf_vectorizer.pkl')
@@ -45,10 +47,10 @@ def apply_background_image(image_path):
 
 # Main Home page for model selection
 def home_page():
-    # Apply background image 
-    apply_background_image(home_page_background_path)  
-    
-     # Apply custom CSS to center and style the title
+    # Apply background image
+    apply_background_image(home_page_background_path)
+
+    # Apply custom CSS to center and style the title
     st.markdown("""
         <style>
         .centered-title {
@@ -63,8 +65,18 @@ def home_page():
     # Render the title using custom class
     st.markdown('<h2 class="centered-title">Fraud Detection in Financial Transaction</h2>', unsafe_allow_html=True)
     
-    if st.button("Start"):
-        st.session_state['page'] = 'type_selection'
+    # Add space to push the button down
+    for _ in range(15):
+        st.write("")  # Add empty space
+    
+    # Create columns to center the button
+    col1, col2, col3, col4, col5, col6, col7 = st.columns([1, 1, 1, 1, 1, 1, 1])  # Adjust the ratios to control the width
+
+    with col4:  # Put the button in the center column
+        if st.button("Start"):
+            st.session_state['page'] = 'type_selection'
+
+
 
 def type_selection():
     apply_background_image(selection_page_background_path)  
@@ -110,9 +122,11 @@ def predict_with_text_mail():  # page
             st.error("Please enter email content.")
         else:
             prediction = None  # Initialize prediction variable
+            
             # If inputs are valid, proceed with the prediction
             transformed_text = tfidf_model.transform([email_content])
             prediction = log_model.predict(transformed_text)
+            
             # Display the result if prediction exists
             if prediction is not None:
                 if prediction[0] == 1:
