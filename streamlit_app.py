@@ -6,7 +6,7 @@ import base64
 
 # Load text models
 tfidf_model = joblib.load(r'/workspaces/Fraud_detection/tfidf_vectorizer.pkl')
-log_model = joblib.load(r'/workspaces/Fraud_detection/Log_model.pkl')
+log_model = joblib.load(r'/workspaces/Fraud_detection/decision_tree_model.pkl')
 # random_forest_model = joblib.load(r'E:\DEPI\FINAL PROJECT\models\text_models\random_forest_model.pkl')
 
 
